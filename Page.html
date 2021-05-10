@@ -10,8 +10,11 @@
 <input type="text" id="SetSeconds" value="Set Seconds Here"> </input>
 <button class="SetTime">Set Time</button>
 <p id= "Replace"> this text here</p>
-<script type="text/javascript">
-
+<audio id="myAudio">
+  <source src="Pounding on a PC Desk.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<script type="text/javascript"> 
 		 const SetTimeBtn = document.querySelector(".SetTime");
 		 SetTimeBtn.addEventListener('click', () => {
 		 	  stopWatch = setInterval(CountUp, 1000);
@@ -26,22 +29,19 @@
     	 let MinutesBoxInt = parseInt(MinutesBoxValue); //the value we will compare with later
     	 let SecondsBoxValue = document.getElementById("SetSeconds").value;  //Text box
     	 let SecondsBoxInt = parseInt(SecondsBoxValue); //the value we will compare with later
-    	 console.log("HoursBoxInt === " + HoursBoxInt);
-    	 console.log("MinutesBoxInt === " + MinutesBoxInt);
-    	 console.log("SecondsBoxInt === " + SecondsBoxInt);
+    	// console.log("HoursBoxInt === " + HoursBoxInt);
+    	 //console.log("MinutesBoxInt === " + MinutesBoxInt);
+    	 //console.log("SecondsBoxInt === " + SecondsBoxInt);
     	 let HourCount = Math.floor(secondsCount / 3600);//This is for counting up, also for the timer
     	 let MinuteCount = Math.floor(secondsCount / 60);//This is for counting up, also for the timer
-    	 let Compare = CompareCountToInput(HoursBoxInt, MinutesBoxInt, SecondsBoxInt, HourCount, MinuteCount, secondsCount); // if the count is smaller, return "smaller", if equal,  return "equal", if bigger, return "bigger"
-    	 console.log(Compare);
-    	 document.getElementById("Replace").innerHTML = `${HourCount}:${MinuteCount}:${secondsCount}`;
+    	 let SecondsCounter = Math.floor(secondsCount % 60);
+    	 let Compare = CompareCountToInput(HoursBoxInt, MinutesBoxInt, SecondsBoxInt, HourCount, MinuteCount, SecondsCounter); // if the count is smaller, return "smaller", if equal,  return "equal", if bigger, return "bigger"
+    	 //console.log(Compare);
+    	 document.getElementById("Replace").innerHTML = `${HourCount}:${MinuteCount}:${SecondsCounter}`;
     	 switch(Compare)
     	 {
     	 	case"Smaller":
     	 		secondsCount++;
-    	 	break;
-    	 	case"Bigger":
-    	 	StopCounting();
-    	 	//um oops I did something wrong then
     	 	break;
     	 	case"Equal":
     	 	StopCounting();
@@ -50,41 +50,38 @@
     }
     function CompareCountToInput(_HoursInt, _MinutesInt, _SecondsInt, _HourCount, _MinuteCount, _SecondsCount)
     {
-    	if(_HourCount <= _HoursInt)
+    	if(_HourCount === _HoursInt)
     	{
-    		if(_MinuteCount <= _MinutesInt)
+    		if(_MinuteCount === _MinutesInt)
     		{
-    			if(_SecondsCount <= _SecondsInt)
+    			if(_SecondsCount === _SecondsInt)
     			{
-    				if (_HoursInt == _HourCount && _MinutesInt == _MinuteCount && _SecondsInt == _SecondsCount)
-    				{
-    					return "Equal";
-    				}
-    			    else //if Count not == to the Int, then Count is smaller
-    				{
-    				 return "Smaller";
-    				}
-    				
+    				return "Equal"
     			}
-    			else //if Count not <= to _secondscount, then Count is bigger
+    			else //if Counts not <= to _SecondsInt, then Count is smaller
     			{
-    				return "Equal";
+    			return "Smaller";
     			}
     		}
-    		else //if Counts not <= to _MinutesInt, then Count is bigger
-    		{
-    				return "Equal";
+    		else //if Counts not <= to _MinutesInt, then Count is smaller
+			{
+    			return "Smaller";
     		}
+
     	}
-    	else //if Counts not <= to _HoursInt, then Count is bigger
+    	else //if Counts not <= to _HoursInt, then Count is smaller
 		{
-    		return "Equal";
+    		return "Smaller";
     	}
     	 // added comments aside the elses for readability, ternary expressions? never heard of them.
     }
     function StopCounting()
     {
     	clearInterval(stopWatch);
+    	//This code is where we would put an audio file if we had one, too lazy to make a sound effect and link it to my github
+    	var x = document.getElementById("myAudio"); 
+    	x.play(); 
+		
     }
 	</script>
 </body>
