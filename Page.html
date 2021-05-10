@@ -9,6 +9,7 @@
 <input type="text" id="SetMinutes" value="Set Minutes Here"> </input>
 <input type="text" id="SetSeconds" value="Set Seconds Here"> </input>
 <button class="SetTime">Set Time</button>
+<button class="Reset">Rest Button</button>
 <p id= "Replace"> this text here</p>
 <audio id="myAudio">
   <source src="Pounding on a PC Desk.mp3" type="audio/mpeg">
@@ -20,6 +21,12 @@
 		 	  stopWatch = setInterval(CountUp, 1000);
         SetTimeBtn.disabled = true;
 		 });
+		 const ResetBtn = document.querySelector(".Reset");
+		 ResetBtn.addEventListener('click', () => {
+		 	clearInterval(stopWatch);
+		 	 SetTimeBtn.disabled = false;
+		 	 secondsCount = 0;
+		 })
 
     let secondsCount = 0; //to count the seconds
     function CountUp() {
