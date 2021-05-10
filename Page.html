@@ -3,9 +3,33 @@
 <head>
 	<title>Alarm Clock</title>
 </head>
+
 <body>
 <input type="text" id="SetHours" value="Set Hours Here"> </input>
 <input type="text" id="SetMinutes" value="Set Minutes Here"> </input>
 <input type="text" id="SetSeconds" value="Set Seconds Here"> </input>
+<button class="SetTime">Set Time</button>
+<p id= "Replace"></p>
+<script type="text/javascript">
+
+		 const SetTimeBtn = document.querySelector(".SetTime");
+		 SetTimeBtn.addEventListener('click', () => {
+		 	  stopWatch = setInterval(CountUp, 1000);
+        startBtn.disabled = true;
+		 });
+
+    let secondsCount = 0; //to count the seconds
+    function Countup() {
+    	 let HoursBoxValue = document.getElementByid("SetHours").value;
+    	 let HoursBoxInt = parseInt(HoursBoxValue);
+    	 let MinutesBoxValue = document.getElementByid("SetMinutes").value;
+    	 let MinutesBoxInt = parseInt(MinutesBoxValue);
+    	 let SecondsBoxValue = document.getElementByid("SetSeconds").value;
+    	 let SecondsBoxInt = parseInt(SecondsBoxValue);
+    	 console.log("HoursBoxInt === " + HoursBoxInt);
+    	 console.log("MinutesBoxInt === " + MinutesBoxInt);
+    	 console.log("SecondsBoxInt === " + SecondsBoxInt);
+    }
+	</script>
 </body>
 </html>
